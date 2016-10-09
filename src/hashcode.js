@@ -10,6 +10,8 @@
 
 (function(window)
 {
+    // Create a global scope of hashArray to store generated hashCodes
+    var hashArray = [];
     window.Hashcode = (function()
     {
         // Used to check objects for own properties
@@ -23,7 +25,8 @@
             {
                 hash = (((hash << 5) - hash) + string.charCodeAt(i)) & 0xFFFFFFFF;
             }
-
+            // Check if the generated hashCode already exists, if it does, then increment by 1 and push to the global hashArray
+            hashArray.indexOf(hash) > -1 ? (hash += 1, hashArray.push(hash)) : hashArray.push(hash)
             return hash;
         };
         // Deep hashes an object
